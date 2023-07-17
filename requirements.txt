@@ -1,0 +1,2 @@
+psycopg
+pyvmomi
