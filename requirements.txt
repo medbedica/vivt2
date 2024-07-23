@@ -1,2 +1,4 @@
 psycopg
 pyvmomi
+pyzabbix
+python-dotenv
