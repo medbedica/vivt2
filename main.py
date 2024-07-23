@@ -40,7 +40,7 @@ def main() -> int:
         row_factory=psycopg.rows.dict_row,
         prepare_threshold=None,
     ) as conn, zapi:
-        # sync_vmware(conn, hosts, username, password)
+        sync_vmware(conn, hosts, username, password)
         sync_zabbix(conn, zapi)
 
     return 0
