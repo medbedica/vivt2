@@ -10,6 +10,13 @@
 - 1 - найдено по техническому имени
 - 2 - найдено по главному ip
 
+
+# zbx_datastore
+- Забираем данные о датасторах из cmdb таблиц vcenter_vm и vcenter_datastore
+- Забираем хосты с группами Windows servers и Linux servers из api zabbix
+- Записываем теги vmdatastore, vmhost и vmcluster для хостов в Zabbix, если они есть в cmdb
+
+  
 # Переменные для работы скрипта
 
 Переменные можно внести в файл `.env`
