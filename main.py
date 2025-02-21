@@ -9,7 +9,7 @@ from pyzabbix.api import ZabbixAPI
 
 from cmdb_sync.vmware import sync_vmware
 from cmdb_sync.zabbix import sync_zabbix
-
+from cmdb_sync.zbx_datastore import sync_zbx_datastore
 
 def main() -> int:
     load_dotenv()
@@ -42,6 +42,7 @@ def main() -> int:
     ) as conn, zapi:
         sync_vmware(conn, hosts, username, password)
         sync_zabbix(conn, zapi)
+        sync_zbx_datastore(conn, zapi)
 
     return 0
 
