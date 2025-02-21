@@ -8,24 +8,12 @@ from sqlalchemy.sql import text, select, update
 from cmdb_sync.logging_config import log_errors
 from cmdb_sync.models import InfraVms2
 
-logger = logging.getLogger(__name__)
+from cmdb_sync.zbx_datastore import sync_zbx_datastore
 
 
 @log_errors(logger)
-def sync_zbx_datastore() -> bool:
-    try:
-        cmdb_url = os.environ["CMDB_DB_CONN"]
-        zabbix_url = os.environ["ZABBIX_API_URL"]
-        zabbix_token = os.environ["ZABBIX_API_TOKEN"]
-    except KeyError as key:
-        logger.error("Не задана переменная окружения: %s", key)
-        return True
-
-    zapi = ZabbixAPI(zabbix_url)
-    zapi.login(api_token=zabbix_token)
-
-    engine = create_engine(cmdb_url,
-                           connect_args={"prepare_threshold": None})
+def sync_zbx_datastore(cmdb_url, zapi) -> bool:
+    engine = create_engine(cmdb_url, connect_args={"prepare_threshold": None})
 
     with Session(engine) as s:
         datastores = s.execute(text("""
